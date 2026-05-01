@@ -49,7 +49,7 @@ def setup_database():
     """)
 
     conn.commit()
-    print("✅ Database ready")
+    print("Database ready")
 
 # -----------------------------
 # INDEX (after insert)
@@ -65,7 +65,7 @@ def create_index():
     """)
 
     conn.commit()
-    print("✅ Index created")
+    print("Index created")
 
 # -----------------------------
 # TRANSFORM FUNCTIONS
@@ -118,12 +118,12 @@ def run_ingestion():
     setup_database()
 
     all_texts = load_all_data()
-    print(f"📊 Total records: {len(all_texts)}")
+    print(f"Total records: {len(all_texts)}")
 
     for i in range(0, len(all_texts), BATCH_SIZE):
         batch = all_texts[i:i + BATCH_SIZE]
 
-        print(f"➡️ Processing batch {i // BATCH_SIZE + 1}")
+        print(f"Processing batch {i // BATCH_SIZE + 1}")
 
         vectors = emb.embed_documents(batch)
 
@@ -140,7 +140,7 @@ if __name__ == "__main__":
     try:
         run_ingestion()
     except Exception as e:
-        print("❌ Error:", e)
+        print("Error:", e)
     finally:
         cur.close()
         conn.close()
