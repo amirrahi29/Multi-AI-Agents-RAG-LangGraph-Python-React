@@ -1,15 +1,15 @@
-# 🚀 Multi-Agent AI System (Python + LangChain + RAG)
+# Multi-Agent AI System (Python + LangChain + RAG)
 
-A production-style **multi-agent AI system** built using Python, LangChain, LangGraph, and PostgreSQL (pgvector).
+A production-style multi-agent AI system built using Python, LangChain, LangGraph, and PostgreSQL (pgvector).
 
-This project demonstrates how to design a scalable **Agentic AI architecture** combining:
+This project demonstrates how to design a scalable Agentic AI architecture combining:
 - Retrieval-Augmented Generation (RAG)
 - Tool-based execution (structured queries)
 - Intelligent routing (decision making)
 
 ---
 
-## 🧠 Architecture Overview
+## Architecture Overview
 
 ```
 User Query
@@ -26,31 +26,31 @@ Response Agent (LLM output generation)
 
 ---
 
-## 🤖 Agents
+## Agents
 
-### 🔹 Query Agent
+### Query Agent
 - Detects user intent (order_status, payment_status, etc.)
 - Classifies query type (structured / rag)
 
-### 🔹 Decision Agent
+### Decision Agent
 - Routes query to the correct agent
 - Ensures efficient execution
 
-### 🔹 RAG Agent
+### RAG Agent
 - Performs semantic search using embeddings
 - Retrieves relevant context from pgvector
 
-### 🔹 Tool Agent
+### Tool Agent
 - Executes structured queries on database
 - Returns exact results (no hallucination)
 
-### 🔹 Response Agent
+### Response Agent
 - Generates final user-friendly response
-- Handles ambiguity & clarification
+- Handles ambiguity and clarification
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 - Python 3.11  
 - LangChain  
@@ -62,7 +62,7 @@ Response Agent (LLM output generation)
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 app/
@@ -78,9 +78,9 @@ data/                # CSV datasets
 
 ---
 
-## ⚡ Setup Instructions
+## Setup Instructions
 
-### 1️⃣ Create Virtual Environment
+### 1. Create Virtual Environment
 
 ```bash
 python -m venv venv
@@ -89,7 +89,7 @@ source venv/bin/activate
 
 ---
 
-### 2️⃣ Install Dependencies
+### 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -97,7 +97,7 @@ pip install -r requirements.txt
 
 ---
 
-### 3️⃣ Setup Environment Variables
+### 3. Setup Environment Variables
 
 Create a `.env` file:
 
@@ -113,7 +113,7 @@ PORT=5432
 
 ---
 
-### 4️⃣ Run Data Ingestion
+### 4. Run Data Ingestion
 
 ```bash
 python -m scripts.ingest_data
@@ -121,7 +121,7 @@ python -m scripts.ingest_data
 
 ---
 
-### 5️⃣ Start API Server
+### 5. Start API Server
 
 ```bash
 uvicorn app.api.main:app --reload
@@ -129,7 +129,7 @@ uvicorn app.api.main:app --reload
 
 ---
 
-## 🌐 API Usage
+## API Usage
 
 ### Endpoint
 
@@ -139,7 +139,7 @@ POST /query
 
 ---
 
-### 🔹 Example Request
+### Example Request
 
 ```json
 {
@@ -149,7 +149,7 @@ POST /query
 
 ---
 
-### 🔹 Example Response
+### Example Response
 
 ```json
 {
@@ -160,7 +160,7 @@ POST /query
 
 ---
 
-### 🔹 Follow-up Query (Memory Example)
+### Follow-up Query (Memory Example)
 
 ```json
 {
@@ -171,7 +171,7 @@ POST /query
 
 ---
 
-## 🧪 API Testing
+## API Testing
 
 - Swagger UI → http://127.0.0.1:8000/docs  
 - Postman  
@@ -179,18 +179,18 @@ POST /query
 
 ---
 
-## 🧠 Features
+## Features
 
-- ✅ Multi-agent architecture  
-- ✅ RAG + Tool hybrid system  
-- ✅ Intelligent routing  
-- ✅ Ambiguity handling (clarification questions)  
-- ✅ Follow-up query support (basic memory)  
-- ✅ FastAPI backend  
+- Multi-agent architecture  
+- RAG + Tool hybrid system  
+- Intelligent routing  
+- Ambiguity handling (clarification questions)  
+- Follow-up query support (basic memory)  
+- FastAPI backend  
 
 ---
 
-## ⚠️ Limitations
+## Limitations
 
 - Basic memory (no persistent session)
 - Rule-based intent detection
@@ -198,7 +198,7 @@ POST /query
 
 ---
 
-## 🚀 Future Improvements
+## Future Improvements
 
 - LangGraph persistent memory (state management)  
 - Structured SQL queries (normalized schema)  
@@ -209,16 +209,15 @@ POST /query
 
 ---
 
-## 📌 Summary
+## Summary
 
-This project demonstrates how to build a **real-world AI backend system** using:
-
+This project demonstrates how to build a real-world AI backend system using:
 - Multi-agent design  
 - Hybrid retrieval strategies (RAG + Tool)  
 - API-first architecture  
 
 ---
 
-## 👨‍💻 Author
+## Author
 
-**Amir Rahi**
+Amir Rahi
