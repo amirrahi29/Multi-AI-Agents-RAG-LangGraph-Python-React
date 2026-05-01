@@ -39,3 +39,7 @@ User Query → Query Agent → Decision Agent → (RAG / Tool) → Response Agen
 
  - source venv/bin/activate
  - pip install -r requirements.txt
+
+ ## run python project
+ 
+  - python -m scripts.ingest_data
