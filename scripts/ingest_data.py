@@ -131,7 +131,7 @@ def run_ingestion():
 
     create_index()
 
-    print("🎉 Data ingestion completed successfully!")
+    print("Data ingestion completed successfully!")
 
 # -----------------------------
 # ENTRY POINT
