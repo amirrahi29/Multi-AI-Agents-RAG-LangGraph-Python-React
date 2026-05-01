@@ -37,5 +37,5 @@ User Query → Query Agent → Decision Agent → (RAG / Tool) → Response Agen
 
 ## packages install
 
-source venv/bin/activate
-pip install -r requirements.txt
+ - source venv/bin/activate
+ - pip install -r requirements.txt
