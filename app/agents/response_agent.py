@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# LLM
 llm = ChatOpenAI(
     model="gpt-4o-mini",
     temperature=0
@@ -18,9 +17,7 @@ def response_agent(state: dict) -> dict:
         return {"response": "No relevant data found."}
 
     prompt = f"""
-You are a helpful assistant.
-
-Answer the user's question ONLY using the provided context.
+You are a strict and intelligent assistant.
 
 Context:
 {context}
@@ -28,11 +25,25 @@ Context:
 Question:
 {query}
 
-Give a clean and concise answer.
+Rules:
+
+1. If the question is ambiguous:
+   - ONLY ask a clarification question
+   - DO NOT mention any specific details from context
+   - DO NOT give hints or guesses
+
+2. If the question is clear:
+   - Answer concisely using context
+   - Include necessary details like order ID or status
+   - Do NOT add unnecessary info (like product or amount unless asked)
+
+3. Always keep response short and natural
+
+Answer:
 """
 
     result = llm.invoke(prompt)
 
     return {
-        "response": result.content
+        "response": result.content.strip()
     }
