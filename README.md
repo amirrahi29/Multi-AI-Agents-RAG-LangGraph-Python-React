@@ -221,6 +221,8 @@ This project demonstrates how to build a real-world AI backend system using:
 ## run app
 
 ---
+- source venv/bin/activate
+- pip install -r requirements.txt
 - uvicorn app.api.main:app --reload
 ---
 
