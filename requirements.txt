@@ -4,6 +4,7 @@
 langchain
 langchain-openai
 openai
+langgraph
 
 # -----------------------------
 # API Framework
