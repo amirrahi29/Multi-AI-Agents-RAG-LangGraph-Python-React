@@ -1,4 +1,4 @@
-# Multi-Agent AI System (Python + LangChain + RAG)
+# Multi-Agent AI System (Python + React + LangChain + RAG)
 
 <table>
   <tr>
