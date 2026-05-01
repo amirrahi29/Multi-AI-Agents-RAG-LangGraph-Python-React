@@ -218,6 +218,12 @@ This project demonstrates how to build a real-world AI backend system using:
 
 ---
 
+## run app
+
+---
+- uvicorn app.api.main:app --reload
+---
+
 ## Author
 
 Amir Rahi
