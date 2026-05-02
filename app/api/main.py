@@ -59,6 +59,7 @@ def handle_query(req: QueryRequest):
 
     assistant_text = final_state.get("response", "")
     route = final_state.get("route", "rag")
+    pipeline_trace = final_state.get("pipeline_trace") or []
 
     turns = list(SESSION_HISTORY.get(session_id, []))
     turns.append({"role": "user", "content": req.query.strip()})
@@ -69,4 +70,5 @@ def handle_query(req: QueryRequest):
         "response": assistant_text,
         "route": route,
         "session_id": session_id,
+        "pipeline_trace": pipeline_trace,
     }
