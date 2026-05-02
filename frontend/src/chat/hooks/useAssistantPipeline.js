@@ -4,8 +4,38 @@ import { ANSWER_EXTRA_DELAY_MS, FIRST_STEP_DELAY_MS, STEP_REVEAL_MS } from '../c
 const STEPS_EXCLUDE_FINAL = (trace) =>
   Array.isArray(trace) ? trace.filter((s) => s?.id && s.id !== 'response_agent') : []
 
-export function useAssistantPipeline(trace, onPipelineTick) {
-  const stepsBeforeAnswer = useMemo(() => STEPS_EXCLUDE_FINAL(trace), [trace])
+/** When the API omits `pipeline_trace`, still show an ordered run for UX. */
+function buildSyntheticPipelineSteps(routeMeta) {
+  if (!routeMeta || routeMeta === 'Error') return []
+  const isTool = String(routeMeta).includes('Tool')
+  const execId = isTool ? 'tool_agent' : 'rag_agent'
+  const execLabel = isTool ? 'Tool agent' : 'RAG agent'
+  return [
+    { id: 'prepare', label: 'Prepare input', summary: 'Query normalized and ready for the agent graph.' },
+    { id: 'query_agent', label: 'Query agent', summary: 'Intent and task type classified for this turn.' },
+    {
+      id: 'decision_agent',
+      label: 'Decision agent',
+      summary: isTool
+        ? 'Route locked to tool path (structured data / SQL).'
+        : 'Route locked to RAG path (vector document search).',
+    },
+    {
+      id: execId,
+      label: execLabel,
+      summary: isTool
+        ? 'Structured lookup completed for this reply.'
+        : 'Relevant chunks retrieved and ranked for this reply.',
+    },
+  ]
+}
+
+export function useAssistantPipeline(pipelineTrace, fallbackRouteMeta, onPipelineTick) {
+  const stepsBeforeAnswer = useMemo(() => {
+    const fromApi = STEPS_EXCLUDE_FINAL(pipelineTrace)
+    if (fromApi.length > 0) return fromApi
+    return buildSyntheticPipelineSteps(fallbackRouteMeta)
+  }, [pipelineTrace, fallbackRouteMeta])
   const skipPipeline = stepsBeforeAnswer.length === 0
   const [revealed, setRevealed] = useState(0)
   const [answerVisible, setAnswerVisible] = useState(skipPipeline)
@@ -38,7 +68,7 @@ export function useAssistantPipeline(trace, onPipelineTick) {
       FIRST_STEP_DELAY_MS + stepsBeforeAnswer.length * STEP_REVEAL_MS + ANSWER_EXTRA_DELAY_MS,
     )
     return () => timers.forEach(clearTimeout)
-  }, [skipPipeline, trace, stepsBeforeAnswer.length])
+  }, [skipPipeline, pipelineTrace, fallbackRouteMeta, stepsBeforeAnswer.length])
 
   useEffect(() => {
     onPipelineTick?.()

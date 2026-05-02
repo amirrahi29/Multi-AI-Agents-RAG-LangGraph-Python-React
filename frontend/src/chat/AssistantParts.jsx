@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AgentGlyph, AssistantBotIcon, CheckBoldIcon, RagAgentIcon, ToolAgentIcon } from './icons'
+import { AgentGlyph, AssistantBotIcon, CheckBoldIcon, RagAgentIcon, SparkleIcon, ToolAgentIcon } from './icons'
 import { CHAT_FLOW_STEPS } from './constants'
 import { pipeAvatarClass } from './utils'
 
@@ -23,10 +23,24 @@ export function StepRawBlock({ detail }) {
 export function PipelineSteps({ steps }) {
   if (steps.length === 0) return null
   return (
-    <div className="assistant-turn-pipeline" aria-label="Agent steps for this reply">
-      <p className="pipeline-block-label">Orchestration · step-by-step</p>
+    <div className="assistant-turn-pipeline assistant-turn-pipeline--timeline" aria-label="Agent steps for this reply">
+      <p className="pipeline-block-label">
+        <SparkleIcon className="pipeline-block-label-icon" aria-hidden />
+        <span>Agents · step-by-step</span>
+      </p>
       {steps.map((step, idx) => (
-        <div key={`${step.id}-${idx}`} className="chat-agent-step">
+        <div
+          key={`${step.id}-${idx}`}
+          className="chat-agent-step"
+          style={{ '--step-i': idx }}
+        >
+          <div className="chat-agent-step-status-col" aria-hidden>
+            {idx > 0 ? <span className="chat-agent-step-status-line chat-agent-step-status-line--before" /> : null}
+            <span className="chat-agent-step-check" title="Done">
+              <CheckBoldIcon className="chat-agent-step-check-icon" strokeWidth={2.8} />
+            </span>
+            {idx < steps.length - 1 ? <span className="chat-agent-step-status-line chat-agent-step-status-line--after" /> : null}
+          </div>
           <div className={`chat-agent-step-avatar ${pipeAvatarClass(step.id)}`} aria-hidden>
             <AgentGlyph agentId={step.id} className="chat-agent-step-icon" />
           </div>

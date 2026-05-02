@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   AgentGlyph,
   AssistantBotIcon,
@@ -64,7 +64,10 @@ function ResponseMemoryVisual() {
   )
 }
 
-export function AgentFlowIntro({ onContinue }) {
+export function AgentFlowIntro({ onContinue, defaultDisplayName = '' }) {
+  const [name, setName] = useState(() => defaultDisplayName.trim())
+  const nameOk = name.trim().length > 0
+
   return (
     <div className="flow-intro" aria-label="How the system works: ingestion, agents, response">
       <div className="flow-intro-content">
@@ -114,10 +117,42 @@ export function AgentFlowIntro({ onContinue }) {
         </div>
 
         <div className="flow-intro-actions">
-          <button type="button" className="flow-intro-btn flow-intro-btn--primary" onClick={onContinue}>
-            <span className="flow-intro-btn-label">Start chatting</span>
-          </button>
-          <p className="flow-intro-actions-hint">You can open this overview again from the chat toolbar anytime.</p>
+          <div className="flow-intro-name-row">
+            <label htmlFor="flow-intro-display-name" className="flow-intro-name-label">
+              Your name
+            </label>
+            <input
+              id="flow-intro-display-name"
+              type="text"
+              className="flow-intro-name-input"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && nameOk) {
+                  e.preventDefault()
+                  onContinue(name.trim())
+                }
+              }}
+              placeholder="e.g. Amir"
+              autoComplete="name"
+              maxLength={80}
+              aria-required="true"
+            />
+            <button
+              type="button"
+              className="flow-intro-btn flow-intro-btn--primary flow-intro-btn--row"
+              onClick={() => nameOk && onContinue(name.trim())}
+              disabled={!nameOk}
+              aria-disabled={!nameOk}
+            >
+              <span className="flow-intro-btn-label">Start chatting</span>
+            </button>
+          </div>
+          <p className="flow-intro-name-hint">Name is required. It appears in the chat toolbar greeting.</p>
+          <p className="flow-intro-actions-hint">
+            Open this overview anytime from <strong>Overview</strong> in the chat toolbar. Sharing this browser? Use{' '}
+            <strong>Switch user</strong> in the header so someone else can enter their name.
+          </p>
         </div>
       </div>
     </div>

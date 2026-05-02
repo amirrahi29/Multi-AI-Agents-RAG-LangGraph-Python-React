@@ -3,13 +3,22 @@ import './App.css'
 import { AssistantTurnBlock } from './chat/AssistantTurnBlock'
 import { ChatPipelineLegend } from './chat/AssistantParts'
 import { AssistantTypingRow, UserMessageRow } from './chat/MessageRows'
-import { MicIcon, SendIcon, SparkleIcon } from './chat/icons'
+import { MicIcon, SendIcon } from './chat/icons'
 import botLogo from './assets/bot-logo.svg'
+import pipelineDiagram from './assets/pipeline-diagram.jpg'
 import { getOrCreateSessionId, randomId } from './chat/utils'
-import { SESSION_STORAGE_KEY } from './chat/constants'
+import { SESSION_STORAGE_KEY, USER_DISPLAY_NAME_KEY } from './chat/constants'
 import { useChatQuery } from './chat/useChatQuery'
 import { AgentFlowIntro } from './chat/AgentFlowIntro'
 import { INTRO_SESSION_KEY } from './chat/agentFlowExplain'
+
+function readStoredDisplayName() {
+  try {
+    return (localStorage.getItem(USER_DISPLAY_NAME_KEY) || '').trim()
+  } catch {
+    return ''
+  }
+}
 
 function introInitiallyHidden() {
   try {
@@ -19,8 +28,15 @@ function introInitiallyHidden() {
   }
 }
 
+/** Intro must run until we have a saved display name. */
+function computeInitialShowIntro() {
+  if (!readStoredDisplayName()) return true
+  return !introInitiallyHidden()
+}
+
 const App = () => {
-  const [showIntro, setShowIntro] = useState(() => !introInitiallyHidden())
+  const [showIntro, setShowIntro] = useState(computeInitialShowIntro)
+  const [displayName, setDisplayName] = useState(() => readStoredDisplayName())
   const [input, setInput] = useState('')
   const [sessionId, setSessionId] = useState(getOrCreateSessionId)
   const [listening, setListening] = useState(false)
@@ -35,6 +51,12 @@ const App = () => {
   }, [])
 
   useEffect(() => {
+    const messagesEl = messagesEndRef.current?.closest?.('.messages--chat')
+    if (!messagesEl) return
+    if (messages.length === 0 && !loading) {
+      messagesEl.scrollTop = 0
+      return
+    }
     scrollToBottom()
   }, [messages, loading, scrollToBottom])
 
@@ -90,16 +112,18 @@ const App = () => {
     }
   }, [listening])
 
-  const dismissIntro = useCallback(() => {
+  const dismissIntro = useCallback((nameFromIntro) => {
+    const n = String(nameFromIntro || '').trim()
+    if (!n) return
     try {
       sessionStorage.setItem(INTRO_SESSION_KEY, '1')
+      localStorage.setItem(USER_DISPLAY_NAME_KEY, n)
     } catch {
       /* ignore */
     }
+    setDisplayName(n)
     setShowIntro(false)
   }, [])
-
-  const openIntro = useCallback(() => setShowIntro(true), [])
 
   const startNewChat = useCallback(() => {
     const id = randomId()
@@ -113,6 +137,32 @@ const App = () => {
     setLastContextQuery(null)
     setInput('')
   }, [setMessages, setLastContextQuery])
+
+  const switchUser = useCallback(() => {
+    if (
+      !window.confirm(
+        'Switch to a different user? This clears your name and chat on this browser so someone else can sign in.',
+      )
+    ) {
+      return
+    }
+    const id = randomId()
+    try {
+      localStorage.removeItem(USER_DISPLAY_NAME_KEY)
+      localStorage.setItem(SESSION_STORAGE_KEY, id)
+      sessionStorage.removeItem(INTRO_SESSION_KEY)
+    } catch {
+      /* ignore */
+    }
+    setSessionId(id)
+    setMessages([])
+    setLastContextQuery(null)
+    setInput('')
+    setDisplayName('')
+    setShowIntro(true)
+  }, [setMessages, setLastContextQuery])
+
+  const openOverview = useCallback(() => setShowIntro(true), [])
 
   const submitMessage = useCallback(() => {
     const raw = input.trim()
@@ -139,18 +189,23 @@ const App = () => {
               </div>
               <div className="brand-text">
                 <h1>Multi-Agent Assistant</h1>
-                <p>LangGraph pipeline: query → decision → tool or RAG → response. Voice: Chrome / Edge.</p>
+                <p>
+                  LangGraph-orchestrated agents · routes to <strong>tool</strong> or <strong>RAG</strong> · voice in
+                  Chrome / Edge
+                </p>
               </div>
             </div>
             <div className="header-actions">
               {showIntro ? (
-                <button type="button" className="btn-header btn-header--ghost" onClick={dismissIntro}>
-                  Skip to chat
-                </button>
+                displayName ? (
+                  <button type="button" className="btn-header btn-header--ghost" onClick={switchUser}>
+                    Switch user
+                  </button>
+                ) : null
               ) : (
                 <>
-                  <button type="button" className="btn-header btn-header--ghost" onClick={openIntro}>
-                    How it works
+                  <button type="button" className="btn-header btn-header--ghost" onClick={switchUser}>
+                    Switch user
                   </button>
                   <button type="button" className="btn-header" onClick={startNewChat} disabled={loading}>
                     New session
@@ -162,40 +217,49 @@ const App = () => {
         </div>
       </header>
 
-      <div className="app-main">
+      <div className="app-main" id="main-content" tabIndex={-1}>
         {showIntro ? (
-          <AgentFlowIntro onContinue={dismissIntro} />
+          <AgentFlowIntro defaultDisplayName={displayName} onContinue={dismissIntro} />
         ) : (
           <div className="app-shell app-shell--chat">
             <div className="chat-panel chat-panel--unified" aria-label="Chat and orchestration">
               <div className="chat-panel-toolbar">
                 <div className="chat-toolbar-left">
                   <ChatPipelineLegend />
-                  <button type="button" className="btn-toolbar-flow" onClick={openIntro}>
-                    How it works
+                  <button type="button" className="btn-toolbar-flow" onClick={openOverview}>
+                    Overview
                   </button>
                 </div>
                 <div className="chat-toolbar-right">
-                <span className="badge-live">
-                  <span className="toolbar-pulse" />
-                  API
-                </span>
-                <span className="badge-soft">{messages.length} messages</span>
-              </div>
+                  {displayName ? (
+                    <span className="chat-user-greeting" title={displayName} aria-label={`Hi, ${displayName}`}>
+                      <span className="chat-user-greeting-hi">Hi,</span>
+                      <span className="chat-user-greeting-name">{displayName}</span>
+                    </span>
+                  ) : null}
+                  <span className="badge-live">
+                    <span className="toolbar-pulse" />
+                    API
+                  </span>
+                  <span className="badge-soft">{messages.length} messages</span>
+                </div>
             </div>
 
             <div
               className={`messages messages--chat${messages.length === 0 && !loading ? ' messages--chat--empty' : ''}`}
             >
               {messages.length === 0 && !loading && (
-                <div className="empty-state empty-state--compact">
-                  <div className="empty-state-icon" aria-hidden>
-                    <SparkleIcon />
-                  </div>
-                  <div>
-                    <h2>Start a run</h2>
-                    <p>Each reply shows agents step by step in this thread, then the final answer.</p>
-                  </div>
+                <div className="empty-state-flow-only">
+                  <img
+                    className="empty-state-flow-img"
+                    src={pipelineDiagram}
+                    width={1024}
+                    height={444}
+                    decoding="sync"
+                    fetchPriority="high"
+                    loading="eager"
+                    alt="Architecture diagram: ingestion pipeline, runtime agents (tool vs RAG), response merge, and session memory loop."
+                  />
                 </div>
               )}
 

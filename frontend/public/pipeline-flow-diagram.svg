@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1720 780" width="1720" height="780" role="img" aria-labelledby="flowTitle">
+  <title id="flowTitle">Ingestion and runtime: multi-agent pipeline with agents and services</title>
+  <defs>
+    <marker id="arr" markerWidth="11" markerHeight="11" refX="10" refY="5.5" orient="auto">
+      <path d="M0 0 L11 5.5 L0 11 Z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1720" height="780" fill="#ffffff"/>
+
+  <!-- Section labels: icon + text only (no outer box) -->
+  <g>
+    <g transform="translate(52 48)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" transform="scale(0.72)" d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z M14 2v6h6"/>
+    </g>
+    <text x="96" y="64" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="11" letter-spacing="0.12em">INGESTION</text>
+    <text x="96" y="78" font-family="system-ui, sans-serif" font-size="8" fill="#64748b">Data pipeline (offline)</text>
+  </g>
+
+  <g>
+    <g transform="translate(52 278)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" transform="scale(0.72)" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </g>
+    <text x="96" y="294" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="11" letter-spacing="0.1em">RUNTIME</text>
+    <text x="96" y="308" font-family="system-ui, sans-serif" font-size="8" fill="#64748b">Agents per message</text>
+  </g>
+
+  <!-- ——— Ingestion row (wider gutters) ——— -->
+  <g>
+    <rect x="48" y="100" width="190" height="118" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="96" cy="159" r="26" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(84 147)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z M14 2v6h6 M10 12h4 M10 16h4 M10 8h2"/>
+    </g>
+    <text x="134" y="135" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">SOURCE</text>
+    <text x="134" y="154" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="13">Documents</text>
+    <text x="134" y="174" font-family="system-ui, sans-serif" font-size="9.5" fill="#475569">files, URLs, knowledge</text>
+  </g>
+  <line x1="238" y1="159" x2="282" y2="159" stroke="#0f172a" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <g>
+    <rect x="282" y="100" width="182" height="118" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="326" cy="159" r="26" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(314 147)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M8 6h12 M8 12h12 M8 18h8 M16 6v6l3 3 M16 12l3-3"/>
+    </g>
+    <text x="364" y="135" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">PIPELINE</text>
+    <text x="364" y="154" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="13">Chunk</text>
+    <text x="364" y="174" font-family="system-ui, sans-serif" font-size="9.5" fill="#475569">split &amp; normalize</text>
+  </g>
+  <line x1="464" y1="159" x2="508" y2="159" stroke="#0f172a" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <g>
+    <rect x="508" y="100" width="182" height="118" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="552" cy="159" r="26" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(540 147)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M12 3l9 4.5v9L12 21l-9-4.5v-9L12 3z M12 12l9-4.5 M12 12v9 M12 12L3 7.5"/>
+    </g>
+    <text x="590" y="135" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">PIPELINE</text>
+    <text x="590" y="154" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="13">Embed</text>
+    <text x="590" y="174" font-family="system-ui, sans-serif" font-size="9.5" fill="#475569">dense vectors</text>
+  </g>
+  <line x1="690" y1="159" x2="734" y2="159" stroke="#0f172a" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <g>
+    <rect x="734" y="92" width="448" height="142" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2.5"/>
+    <circle cx="786" cy="159" r="28" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(770 143)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M12 3c4.5 0 8 1.5 8 3.5v11c0 2-3.5 3.5-8 3.5s-8-1.5-8-3.5V6.5C4 4.5 7.5 3 12 3z M4 6.5c0 2 3.5 3.5 8 3.5s8-1.5 8-3.5 M4 12c0 2 3.5 3.5 8 3.5s8-1.5 8-3.5"/>
+    </g>
+    <text x="830" y="128" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">VECTOR STORE</text>
+    <text x="830" y="142" font-family="system-ui, sans-serif" font-size="7.5" fill="#64748b">Infrastructure (not an agent)</text>
+    <text x="830" y="162" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="15">Vector database</text>
+    <text x="830" y="184" font-family="system-ui, sans-serif" font-size="10.5" fill="#475569">PostgreSQL · pgvector · retrieval index</text>
+    <text x="830" y="206" font-family="system-ui, sans-serif" font-size="9" fill="#64748b">Used by RAG at query time</text>
+  </g>
+
+  <!-- Semantic retrieve → RAG (clear elbow, more horizontal before drop) -->
+  <path d="M 958 235 L 958 420 L 992 420 L 992 493" fill="none" stroke="#0f172a" stroke-width="2" stroke-dasharray="10 8" stroke-linecap="round" marker-end="url(#arr)"/>
+  <rect x="876" y="252" width="136" height="30" rx="8" fill="#ffffff" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="944" y="272" text-anchor="middle" fill="#0f172a" font-family="system-ui, sans-serif" font-size="9" font-weight="700">semantic retrieve</text>
+
+  <!-- ——— Runtime spine Y = 404 ——— -->
+  <g>
+    <rect x="48" y="348" width="176" height="108" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="94" cy="402" r="24" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(82 390)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
+    </g>
+    <text x="128" y="382" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">CLIENT</text>
+    <text x="128" y="402" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="13">User</text>
+    <text x="128" y="420" font-family="system-ui, sans-serif" font-size="9.5" fill="#475569">HTTP / API request</text>
+  </g>
+  <line x1="224" y1="404" x2="272" y2="404" stroke="#0f172a" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <g>
+    <rect x="272" y="358" width="176" height="92" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="312" cy="404" r="24" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(300 392)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3 M9 10h6M16 8h5M8 16h8"/>
+    </g>
+    <text x="348" y="386" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">AGENT</text>
+    <text x="348" y="406" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="13">Prepare</text>
+    <text x="348" y="424" font-family="system-ui, sans-serif" font-size="9.5" fill="#475569">context &amp; prompts</text>
+  </g>
+  <line x1="448" y1="404" x2="496" y2="404" stroke="#0f172a" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <g>
+    <rect x="496" y="358" width="176" height="92" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="536" cy="404" r="24" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(524 392)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z M21 21l-4.35-4.35"/>
+    </g>
+    <text x="572" y="386" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">AGENT</text>
+    <text x="572" y="406" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="13">Query</text>
+    <text x="572" y="424" font-family="system-ui, sans-serif" font-size="9.5" fill="#475569">NL → structured ask</text>
+  </g>
+  <line x1="672" y1="404" x2="680" y2="404" stroke="#0f172a" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <g>
+    <rect x="680" y="338" width="236" height="132" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2.5"/>
+    <circle cx="724" cy="404" r="26" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(710 390)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M6 3v12 M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M6 9a9 9 0 0 1 9 9"/>
+    </g>
+    <text x="762" y="378" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">ROUTER AGENT</text>
+    <text x="762" y="400" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="13">Decision</text>
+    <text x="762" y="422" font-family="system-ui, sans-serif" font-size="9.5" fill="#475569">classify · route Tool / RAG</text>
+    <text x="762" y="442" font-family="system-ui, sans-serif" font-size="8.5" fill="#64748b">Picks the next agent / path</text>
+  </g>
+
+  <!-- Decision → Tool / RAG: long horizontal stem, then vertical (less cramped) -->
+  <path d="M 916 376 L 952 376 L 952 289 L 962 289" fill="none" stroke="#0f172a" stroke-width="2.5" marker-end="url(#arr)"/>
+  <path d="M 916 432 L 952 432 L 952 493 L 962 493" fill="none" stroke="#0f172a" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <!-- Tool / RAG: farther right, more vertical separation -->
+  <g>
+    <rect x="962" y="244" width="180" height="90" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="1002" cy="289" r="22" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(992 279) scale(0.92)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+    </g>
+    <text x="1034" y="274" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">TOOL AGENT</text>
+    <text x="1034" y="296" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="13">Tool</text>
+    <text x="1034" y="314" font-family="system-ui, sans-serif" font-size="9.5" fill="#475569">APIs · actions</text>
+  </g>
+
+  <g>
+    <rect x="962" y="448" width="180" height="90" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="1002" cy="493" r="22" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(990 481)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z M12 8v8 M8 12h8"/>
+    </g>
+    <text x="1034" y="478" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">RAG AGENT</text>
+    <text x="1034" y="500" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="13">RAG</text>
+    <text x="1034" y="518" font-family="system-ui, sans-serif" font-size="9.5" fill="#475569">retrieve · rank · pack</text>
+  </g>
+
+  <!-- Merge: roomy jog before Response -->
+  <path d="M 1142 289 L 1168 289 L 1168 404 L 1208 404" fill="none" stroke="#0f172a" stroke-width="2.5" marker-end="url(#arr)"/>
+  <path d="M 1142 493 L 1168 493 L 1168 404" fill="none" stroke="#0f172a" stroke-width="2.5"/>
+
+  <g>
+    <rect x="1208" y="356" width="244" height="100" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="1252" cy="406" r="24" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(1240 394)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M12 8V4H8M12 8h4M12 8H8M8 12H4v8h16v-8h-4M8 12v8M16 12v8"/>
+    </g>
+    <text x="1286" y="382" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">SYNTHESIS AGENT</text>
+    <text x="1286" y="404" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="13">Response</text>
+    <text x="1286" y="424" font-family="system-ui, sans-serif" font-size="9.5" fill="#475569">merge tool + RAG traces</text>
+  </g>
+  <line x1="1452" y1="406" x2="1476" y2="406" stroke="#0f172a" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <g>
+    <rect x="1476" y="364" width="124" height="108" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2.5"/>
+    <circle cx="1514" cy="416" r="24" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(1502 404)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z M8 10h8 M8 14h6"/>
+    </g>
+    <text x="1542" y="398" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">OUTPUT</text>
+    <text x="1542" y="420" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="14">Answer</text>
+    <text x="1542" y="442" font-family="system-ui, sans-serif" font-size="9.5" fill="#475569">stream + memory</text>
+  </g>
+
+  <!-- Session -->
+  <g>
+    <rect x="48" y="542" width="264" height="124" rx="14" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="96" cy="602" r="24" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+    <g transform="translate(84 590)">
+      <path fill="none" stroke="#0f172a" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8 M3 3v5h5"/>
+    </g>
+    <text x="134" y="574" fill="#0f172a" font-family="system-ui, sans-serif" font-size="7" font-weight="800" letter-spacing="0.06em">SESSION MEMORY</text>
+    <text x="134" y="590" font-family="system-ui, sans-serif" font-size="7.5" fill="#64748b">Not an agent — state only</text>
+    <text x="134" y="614" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="800" font-size="13">Session</text>
+    <text x="134" y="636" font-family="system-ui, sans-serif" font-size="9.5" fill="#475569">turn history · context window</text>
+  </g>
+  <line x1="136" y1="456" x2="136" y2="532" stroke="#0f172a" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M 312 604 L 480 604 L 480 404 L 496 404" fill="none" stroke="#0f172a" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="388" y="588" fill="#475569" font-family="system-ui, sans-serif" font-size="10" font-weight="600">context into Query</text>
+
+  <path d="M 1538 473 L 1538 722 L 180 722 L 180 542" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="12 10" stroke-linecap="round" marker-end="url(#arr)"/>
+  <text x="860" y="752" text-anchor="middle" fill="#475569" font-family="system-ui, sans-serif" font-size="10" font-weight="600">persist state after reply (memory loop)</text>
+</svg>

@@ -7,7 +7,7 @@ import { routePillClass } from './utils'
  * One assistant turn: orchestration steps (staggered) then final answer.
  */
 export function AssistantTurnBlock({ msg, onPipelineTick }) {
-  const { visibleSteps, answerVisible } = useAssistantPipeline(msg.pipelineTrace, onPipelineTick)
+  const { visibleSteps, answerVisible } = useAssistantPipeline(msg.pipelineTrace, msg.meta, onPipelineTick)
 
   return (
     <div className="assistant-turn">
