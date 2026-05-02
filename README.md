@@ -3,10 +3,10 @@
 <table>
   <tr>
     <td width="40%">
-      <img src="hScreenshot 2026-05-02 at 2 06 52 PM" src="https://github.com/user-attachments/assets/6b6253fa-af64-41cb-bcdf-f0a59428efcd" width="100%" />
+      <img src="https://github.com/user-attachments/assets/6b6253fa-af64-41cb-bcdf-f0a59428efcd" width="100%" />
     </td>
     <td width="40%">
-      <img src="Screenshot 2026-05-02 at 2 07 53 PM" src="https://github.com/user-attachments/assets/78552cd9-7901-4213-802e-2a9f31f2f146" width="100%" />
+      <img src="https://github.com/user-attachments/assets/78552cd9-7901-4213-802e-2a9f31f2f146" width="100%" />
     </td>
   </tr>
 </table>
