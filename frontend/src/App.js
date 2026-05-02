@@ -8,8 +8,19 @@ import botLogo from './assets/bot-logo.svg'
 import { getOrCreateSessionId, randomId } from './chat/utils'
 import { SESSION_STORAGE_KEY } from './chat/constants'
 import { useChatQuery } from './chat/useChatQuery'
+import { AgentFlowIntro } from './chat/AgentFlowIntro'
+import { INTRO_SESSION_KEY } from './chat/agentFlowExplain'
+
+function introInitiallyHidden() {
+  try {
+    return sessionStorage.getItem(INTRO_SESSION_KEY) === '1'
+  } catch {
+    return false
+  }
+}
 
 const App = () => {
+  const [showIntro, setShowIntro] = useState(() => !introInitiallyHidden())
   const [input, setInput] = useState('')
   const [sessionId, setSessionId] = useState(getOrCreateSessionId)
   const [listening, setListening] = useState(false)
@@ -79,6 +90,17 @@ const App = () => {
     }
   }, [listening])
 
+  const dismissIntro = useCallback(() => {
+    try {
+      sessionStorage.setItem(INTRO_SESSION_KEY, '1')
+    } catch {
+      /* ignore */
+    }
+    setShowIntro(false)
+  }, [])
+
+  const openIntro = useCallback(() => setShowIntro(true), [])
+
   const startNewChat = useCallback(() => {
     const id = randomId()
     try {
@@ -121,20 +143,39 @@ const App = () => {
               </div>
             </div>
             <div className="header-actions">
-              <button type="button" className="btn-header" onClick={startNewChat} disabled={loading}>
-                New session
-              </button>
+              {showIntro ? (
+                <button type="button" className="btn-header btn-header--ghost" onClick={dismissIntro}>
+                  Skip to chat
+                </button>
+              ) : (
+                <>
+                  <button type="button" className="btn-header btn-header--ghost" onClick={openIntro}>
+                    How it works
+                  </button>
+                  <button type="button" className="btn-header" onClick={startNewChat} disabled={loading}>
+                    New session
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
       </header>
 
       <div className="app-main">
-        <div className="app-shell app-shell--chat">
-          <div className="chat-panel chat-panel--unified" aria-label="Chat and orchestration">
-            <div className="chat-panel-toolbar">
-              <ChatPipelineLegend />
-              <div className="chat-toolbar-right">
+        {showIntro ? (
+          <AgentFlowIntro onContinue={dismissIntro} />
+        ) : (
+          <div className="app-shell app-shell--chat">
+            <div className="chat-panel chat-panel--unified" aria-label="Chat and orchestration">
+              <div className="chat-panel-toolbar">
+                <div className="chat-toolbar-left">
+                  <ChatPipelineLegend />
+                  <button type="button" className="btn-toolbar-flow" onClick={openIntro}>
+                    How it works
+                  </button>
+                </div>
+                <div className="chat-toolbar-right">
                 <span className="badge-live">
                   <span className="toolbar-pulse" />
                   API
@@ -218,6 +259,7 @@ const App = () => {
             </div>
           </div>
         </div>
+        )}
       </div>
     </div>
   )

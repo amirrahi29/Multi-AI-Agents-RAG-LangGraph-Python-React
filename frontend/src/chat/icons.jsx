@@ -8,6 +8,29 @@ function IconSvg({ children, className, ...rest }) {
   )
 }
 
+/** Documents and chunks landing in the knowledge store (ingestion). */
+export function IngestionIcon({ className, ...rest }) {
+  return (
+    <IconSvg viewBox="0 0 24 24" className={className} {...rest}>
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" />
+      <path d="M14 2v6h6" />
+      <path d="M8 13h8M8 17h6" />
+      <path d="M12 11v6M9 14l3 3 3-3" />
+    </IconSvg>
+  )
+}
+
+/** Session stack / recall (conversation memory). */
+export function MemoryIcon({ className, ...rest }) {
+  return (
+    <IconSvg viewBox="0 0 24 24" className={className} {...rest}>
+      <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83l-8.59-3.91z" />
+      <path d="M2 11.2v2.15a1 1 0 0 0 .6.91l8 3.6a2 2 0 0 0 1.64 0l8-3.6a1 1 0 0 0 .6-.91V11.2" />
+      <path d="M2 16.2v2.15a1 1 0 0 0 .6.91l8 3.6a2 2 0 0 0 1.64 0l8-3.6a1 1 0 0 0 .6-.91V16.2" />
+    </IconSvg>
+  )
+}
+
 export function PrepareInputIcon({ className, ...rest }) {
   return (
     <IconSvg viewBox="0 0 24 24" className={className} {...rest}>
