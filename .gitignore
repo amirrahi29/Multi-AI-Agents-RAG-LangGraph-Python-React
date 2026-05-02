@@ -71,8 +71,8 @@ htmlcov/
 # -----------------------------
 # Data files (optional)
 # -----------------------------
-data/*.csv
-data/*.json
+# data/*.csv
+# data/*.json
 
 # -----------------------------
 # Temporary files

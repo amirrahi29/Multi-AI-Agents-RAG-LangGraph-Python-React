@@ -1,0 +1,6 @@
+order_id,user_id,product,amount,status
+101,1,iPhone 15,80000,delivered
+102,2,MacBook Air,120000,pending
+103,3,Headphones,3000,shipped
+104,4,Smart Watch,7000,cancelled
+105,5,Laptop Bag,1500,delivered
